@@ -58,6 +58,40 @@ Primary key প্রতিটি row কে uniquely identify করে যা 
 
 # question 3:
 
+GROUP BY এর সাহায্যে মূলত কলামের একই ধরনের record গুলো নিয়ে একত্রে গ্রুপিং করা হয়। এর উদ্দেশ্য হচ্ছে যাতে একই জাতীয় প্রত্যেকটি Field এর উপর আলাদা আলাদা ভাবে Aggregate ফাংশন run করা যায়।
+
+যেমন: মনে করি স্কুলের একটি শ্রেণীতে ৩টি শাখা রয়েছে 'ক', 'খ' এবং 'গ'। এবং প্রত্যেকটি শাখাতে কতজন শিক্ষার্থী রয়েছে সেই ডাটা Retrieve করতে হবে।
+
+example :
+```
+SELECT section, COUNT(*) AS total_students_in_section
+FROM students
+GROUP BY section;
+```
+
+### Role in aggregation operations:
+
+এরকম আরো অনেক সিনারিওতে গ্রুপগুলো নিয়ে count() এর পাশাপাশি sum(), avg(), min(), max() ইত্যাদি অপারেশন ইমপ্লিমেন্টের প্রয়োজন পরে। তখন GROUP BY ব্যবহার করে এসব সহজেই করে ফেলা যায়।
+
+examples:
+```
+SELECT section, SUM(marks) AS total_marks_in_section
+FROM students
+GROUP BY section;
+```
+
+এটির সাহায্য প্রতিটি সেকশনের জন্য সব শিক্ষার্থীর মোট Marks এর যোগফল দেখাবে।
+```
+SELECT section, AVG(marks) AS average_marks_in_section
+FROM students
+GROUP BY section;
+```
+
+এবং এভাবে প্রতিটি সেকশনে শিক্ষার্থীদের Marks এর avarage বের করা যাবে।
+
+
+# question 4:
+
 SELECT statement এর WHERE  clause ব্যবহার করে কোনো নির্দিষ্ট শর্ত বা condition এর উপর ভিত্তি করে ডাটা ফিল্টার করা হয়। এটির মূল কাজ হচ্ছে আপনার যেই ডাটাগুলো দরকার, নির্দিষ্ট শর্তের উপর ভিত্তি করে সেই ডাটা গুলো retrieve করতে পারবেন।
 
 example:
@@ -71,7 +105,7 @@ SELECT name, age
 এখানে একটি নির্দিষ্ট শর্ত Age এর উপর ভিত্তি করে ফিল্টার করা হয় ফলে শুধুমাত্র যেসব মেন্টরদের বয়স ২৫ এর বেশি তাদের নাম এবং বয়স ই retrieve করা হয়েছে। তাই এটি অত্যন্ত গুরুত্বপূর্ণ একটা Clause যা ছাড়া প্রয়োজনীয় ডাটা retrieve
 
 
-# question 4:
+# question 5:
 
 কোনো নির্দিষ্ট সংখ্যক Row এর Data retrieve করতে LIMIT এবং কতগুলো Row skip করে তারপরে গিয়ে retrieve করবে সেটা বলে দেওয়ার কাজ করে OFFSET। এটি মূলত Pagination এর জন্য বেশি ব্যবহৃত হয়। যেমন: যদি বলা হয় LIMIT 10 OFFSET 10 তাহলে টেবিলের প্রথম ১০ টি রো এর ডাটা skip করে পরের ১০ টি রো এর ডাটা বের করে আনবে।
 
@@ -81,7 +115,6 @@ example:
 SELECT * FROM products
     ORDER BY product_id
     LIMIT 10 OFFSET 10*0;
-
 ```
 
 for retrieve the first page's 10 data
@@ -94,4 +127,6 @@ SELECT * FROM products
 ```
 
 
-for retrieve the second pages 10 data
+for retrieve the second pages 10 data.
+
+
