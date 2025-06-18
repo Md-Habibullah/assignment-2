@@ -29,7 +29,7 @@ postgreSQL একটি Open Source এবং ফ্রী হওয়ায় এ�
 Primary key হচ্ছে একটি Field বা একাধিক Field-এর কম্বিনেশন যা একটি Row বা Record কে ইউনিকভাবে শনাক্ত করে। Primary key প্রতিটি টেবিলে ১টি-ই থাকে এবং এটি Null Value হতে পারেনা।
 
 
-```
+```sql
 CREATE TABLE Employee (
     employee_id SERIAL PRIMARY KEY,
     employee_name VARCHAR(50),
@@ -44,7 +44,7 @@ CREATE TABLE Employee (
 Foreign কি এমন একটি কলাম যা অন্য টেবিলের Primary key কে রেফার করে। যার সাহায্যে যেই টেবিলের সাথে লিংক করা যায় এবং একটি Foreign key দিয়েই সেই পুরো টেবিলের ডাটা read করা যায়।
 
 
-```
+```sql
 CREATE TABLE Project (
     project_id SERIAL PRIMARY KEY,
     employee_id INTEGER REFERENCES employee(employee_id),
@@ -63,7 +63,7 @@ GROUP BY এর সাহায্যে মূলত কলামের এক�
 যেমন: মনে করি স্কুলের একটি শ্রেণীতে ৩টি শাখা রয়েছে 'ক', 'খ' এবং 'গ'। এবং প্রত্যেকটি শাখাতে কতজন শিক্ষার্থী রয়েছে সেই ডাটা Retrieve করতে হবে।
 
 example :
-```
+```sql
 SELECT section, COUNT(*) AS total_students_in_section
 FROM students
 GROUP BY section;
@@ -74,14 +74,14 @@ GROUP BY section;
 এরকম আরো অনেক সিনারিওতে গ্রুপগুলো নিয়ে count() এর পাশাপাশি sum(), avg(), min(), max() ইত্যাদি অপারেশন ইমপ্লিমেন্টের প্রয়োজন পরে। তখন GROUP BY ব্যবহার করে এসব সহজেই করে ফেলা যায়।
 
 examples:
-```
+```sql
 SELECT section, SUM(marks) AS total_marks_in_section
 FROM students
 GROUP BY section;
 ```
 
 এটির সাহায্য প্রতিটি সেকশনের জন্য সব শিক্ষার্থীর মোট Marks এর যোগফল দেখাবে।
-```
+```sql
 SELECT section, AVG(marks) AS average_marks_in_section
 FROM students
 GROUP BY section;
@@ -96,7 +96,7 @@ SELECT statement এর WHERE  clause ব্যবহার করে কোন�
 
 example:
 
-```
+```sql
 SELECT name, age
     FROM Mentors
     WHERE age > 25;
@@ -111,7 +111,7 @@ SELECT name, age
 
 example:
 
-```
+```sql
 SELECT * FROM products
     ORDER BY product_id
     LIMIT 10 OFFSET 10*0;
@@ -120,7 +120,7 @@ SELECT * FROM products
 for retrieve the first page's 10 data
 
 
-```
+```sql
 SELECT * FROM products
     ORDER BY product_id
     LIMIT 10 OFFSET 10*1;
