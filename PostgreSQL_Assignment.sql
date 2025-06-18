@@ -1,11 +1,6 @@
 -- Active: 1747579130667@@localhost@5432@conservation_db@public
 
 -- -- Create the rangers table
--- DROP TABLE rangers;
-
--- DROP TABLE sightings;
-
--- DROP TABLE species
 
 CREATE TABLE rangers (
     ranger_id SERIAL PRIMARY KEY,
@@ -130,7 +125,7 @@ SELECT * FROM sightings
 -- Register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
 
 INSERT INTO
-    rangers (ranger_name, region)
+    rangers (name, region)
 VALUES ('Derek Fox', 'Coastal Plains')
 
 -- Problem 2
@@ -147,11 +142,11 @@ SELECT * FROM sightings WHERE location LIKE '%Pass%'
 -- Problem 4
 -- List each ranger's name and their total number of sightings.
 
-SELECT ranger_name, count(species_id)
+SELECT name, count(species_id)
 FROM rangers
     JOIN sightings ON rangers.ranger_id = sightings.ranger_id
 GROUP BY
-    ranger_name
+    name
 
 -- Problem 5
 -- List species that have never been sighted.
@@ -165,10 +160,7 @@ WHERE
 -- Problem 6
 -- Show the most recent 2 sightings.
 
-SELECT
-    common_name,
-    sighting_time,
-    ranger_name
+SELECT common_name, sighting_time, name
 FROM
     rangers
     JOIN sightings ON rangers.ranger_id = sightings.ranger_id
