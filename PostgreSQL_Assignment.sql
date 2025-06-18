@@ -115,11 +115,11 @@ VALUES (
     );
 
 -- View all data in output
-SELECT * FROM rangers
+SELECT * FROM rangers;
 
-SELECT * FROM species
+SELECT * FROM species;
 
-SELECT * FROM sightings
+SELECT * FROM sightings;
 
 -- Problem 1
 -- Register a new ranger with provided data with name = 'Derek Fox' and region = 'Coastal Plains'
@@ -142,7 +142,7 @@ SELECT * FROM sightings WHERE location LIKE '%Pass%'
 -- Problem 4
 -- List each ranger's name and their total number of sightings.
 
-SELECT name, count(species_id)
+SELECT name, count(species_id) AS total_sightings
 FROM rangers
     JOIN sightings ON rangers.ranger_id = sightings.ranger_id
 GROUP BY
@@ -213,7 +213,7 @@ SELECT
         WHEN sighting_time::time >= TIME '12:00:00'
         AND sighting_time::time <= TIME '17:00:00' THEN 'Afternoon'
         ELSE 'Evening'
-    END AS day_of_time
+    END AS time_of_day
 FROM sightings
 
 -- Problem 9
