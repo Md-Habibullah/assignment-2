@@ -1,9 +1,15 @@
 -- Active: 1747579130667@@localhost@5432@conservation_db@public
 
--- Create the rangers table
+-- -- Create the rangers table
+-- DROP TABLE rangers;
+
+-- DROP TABLE sightings;
+
+-- DROP TABLE species
+
 CREATE TABLE rangers (
     ranger_id SERIAL PRIMARY KEY,
-    ranger_name VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     region VARCHAR(50) NOT NULL
 );
 
@@ -31,7 +37,7 @@ CREATE TABLE sightings (
 
 -- Insert data into rangers
 INSERT INTO
-    rangers (ranger_name, region)
+    rangers (name, region)
 VALUES (
         'Alice Green',
         'Northern Hills'
